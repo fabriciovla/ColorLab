@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>ColorLab | Generador de Paletas de Colores</title>
+<meta name="description" content="ColorLab es un generador de paletas de colores basado en el espacio OKLCH. Crea armonías análogas, complementarias, triádicas y más. Exporta en CSS, HEX, OKLCH, HSL y Tailwind. Por Fabricio Varela." />
+<meta name="author" content="Fabricio Varela" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://colorlab.fabriciovarela.com/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://colorlab.fabriciovarela.com/" />
+<meta property="og:title" content="ColorLab — Generador de Paletas de Colores" />
+<meta property="og:description" content="Genera paletas de colores armónicas en el espacio OKLCH. Armonías análogas, complementarias, triádicas, tetrádicas y monocromáticas. Exporta en CSS, HEX, OKLCH, HSL y Tailwind." />
+<meta property="og:image" content="https://colorlab.fabriciovarela.com/img/favicon-512.png" />
+<meta property="og:locale" content="es_AR" />
+<meta property="og:site_name" content="ColorLab" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ColorLab — Generador de Paletas de Colores" />
+<meta name="twitter:description" content="Genera paletas de colores armónicas en el espacio OKLCH. Exporta en CSS, HEX, OKLCH, HSL y Tailwind." />
+<meta name="twitter:image" content="https://colorlab.fabriciovarela.com/img/favicon-512.png" />
+<meta name="twitter:creator" content="@fabriciovarela" />
+
+<!-- Favicons -->
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png" />
+<link rel="apple-touch-icon" sizes="256x256" href="img/favicon-256.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="img/favicon-512.png" />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet" />
+
+<!-- Styles -->
+<link rel="stylesheet" href="style.css" />
+
+<!-- JSON-LD structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://colorlab.fabriciovarela.com/#website",
+      "url": "https://colorlab.fabriciovarela.com/",
+      "name": "ColorLab",
+      "description": "Generador de paletas de colores basado en el espacio OKLCH con armonías matemáticas.",
+      "author": {
+        "@type": "Person",
+        "name": "Fabricio Varela",
+        "url": "https://fabriciovarela.com"
+      },
+      "inLanguage": "es",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://colorlab.fabriciovarela.com/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://colorlab.fabriciovarela.com/#app",
+      "name": "ColorLab — Generador de Paletas",
+      "url": "https://colorlab.fabriciovarela.com/",
+      "applicationCategory": "DesignApplication",
+      "operatingSystem": "Web",
+      "description": "Herramienta gratuita para generar paletas de colores armónicas usando el espacio OKLCH. Soporta armonías análogas, complementarias, triádicas, tetrádicas y monocromáticas. Exporta en CSS variables, HEX, OKLCH, HSL y Tailwind CSS.",
+      "author": {
+        "@type": "Person",
+        "name": "Fabricio Varela"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Generación de paletas en espacio OKLCH",
+        "Armonías análoga, complementaria, split, triádica, tetrádica y monocromática",
+        "Exportación en CSS variables, HEX, OKLCH, HSL y Tailwind",
+        "Verificación de contraste WCAG 2.1",
+        "Vista previa de UI en tiempo real",
+        "Asistente de color con IA"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ColorLab",
+          "item": "https://colorlab.fabriciovarela.com/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="shell">
+  <header class="top">
+    <div class="brand">
+      <div class="brand-title-row">
+        <img src="img/favicon.svg" class="brand-logo" alt="" />
+        <h1>ColorLab.</h1>
+      </div>
+    </div>
+    <div class="top-meta">
+      <span class="kbd-hints">Pulsa <span class="kbd">space</span> para regenerar · <span class="kbd">C</span> para copiar todo</span>
+    </div>
+  </header>
+
+  <section class="controls">
+    <div class="control-group">
+      <div class="ctrl">
+        <label>armonía</label>
+        <div class="seg-wrap">
+          <div class="seg" id="harmony-seg">
+            <button data-harmony="analoga" class="is-active">Análoga</button>
+            <button data-harmony="complementaria">Complementaria</button>
+            <button data-harmony="split">Split</button>
+            <button data-harmony="triada">Triádica</button>
+            <button data-harmony="tetrada">Tetrádica</button>
+            <button data-harmony="mono">Monocromática</button>
+          </div>
+        </div>
+      </div>
+      <div class="ctrl">
+        <label>matiz base</label>
+        <div class="slider-wrap">
+          <input id="hue" type="range" class="hue-slider" min="0" max="360" step="1" value="32" />
+          <span class="hue-readout mono" id="hue-readout">32°</span>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn" id="btn-shuffle" title="Aleatorizar matiz base">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 3h5v5"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/><path d="M16 21h5v-5"/><path d="M21 21l-7-7"/><path d="M3 3l7 7"/></svg>
+        Aleatorio
+      </button>
+      <button class="btn primary" id="btn-regen">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+        Regenerar
+      </button>
+    </div>
+  </section>
+
+  <section class="palette" id="palette"></section>
+
+  <section class="lower">
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Vista previa</h3>
+        <span class="hint">UI · tipografía · cards</span>
+      </div>
+      <div class="preview-wrap">
+        <div class="preview-frame" id="preview">
+          <div class="preview-left">
+            <span class="pv-eyebrow" id="pv-eyebrow">Estudio · 2026</span>
+            <h2 class="pv-title">Diseñar con color, no decorar con él.</h2>
+            <p class="pv-body">Una paleta coherente nace de relaciones matemáticas en el espacio OKLCH: matiz, croma y luminosidad ajustados con intención.</p>
+            <div class="pv-buttons">
+              <button class="pv-btn solid" id="pv-btn-solid">Empezar</button>
+              <button class="pv-btn">Documentos →</button>
+            </div>
+          </div>
+          <div class="preview-right">
+            <div class="pv-card" id="pv-card-1">
+              <span class="pv-tag" id="pv-tag-1">● activo</span>
+              <span class="pv-num">68%</span>
+              <span class="pv-lab">conversión semanal</span>
+            </div>
+            <div class="pv-card" id="pv-card-2">
+              <span class="pv-num">12.4k</span>
+              <span class="pv-lab">visitas únicas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <h3>Exportar</h3>
+        <span class="hint">copia y pega</span>
+      </div>
+      <div class="export-tabs" id="export-tabs">
+        <button data-fmt="css" class="is-active">CSS VARS</button>
+        <button data-fmt="hex">HEX</button>
+        <button data-fmt="oklch">OKLCH</button>
+        <button data-fmt="hsl">HSL</button>
+        <button data-fmt="tailwind">TAILWIND</button>
+      </div>
+      <pre class="export-body" id="export-body"></pre>
+      <div class="export-foot">
+        <small id="export-meta">8 colores · armonía análoga</small>
+        <button class="btn" id="btn-copy-export">
+          <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+          Copiar
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="contrast-strip">
+    <div class="contrast-head">
+      <h3>Contraste sobre el primer color</h3>
+      <small>WCAG 2.1 · AA 4.5 · AAA 7.0</small>
+    </div>
+    <div class="contrast-grid" id="contrast-grid"></div>
+  </section>
+
+  <footer class="foot">
+    <div class="row mono">
+      <span>oklch · </span>
+      <span class="sep">/</span>
+      <span>relaciones armónicas</span>
+      <span class="sep">/</span>
+      <span>contraste wcag</span>
+      <span class="sep">/</span>
+      <span class="serif" style="font-style:italic;font-size:13px;letter-spacing:-0.01em;">Fabricio Varela</span>
+    </div>
+    <div class="row">
+      <span><span class="kbd">space</span> regenerar</span>
+      <span><span class="kbd">L</span> bloquear</span>
+      <span><span class="kbd">C</span> copiar</span>
+    </div>
+  </footer>
+</div>
+
+<div class="toast" id="toast">copiado</div>
+
+<div id="ai-widget">
+  <div class="ai-panel hidden" id="ai-panel">
+    <div class="ai-head">
+      <div class="ai-head-left">
+        <span class="ai-name">Asistente de color</span>
+        <span class="ai-sub">describe tu idea</span>
+      </div>
+      <button class="ai-close-btn" id="ai-close" aria-label="Cerrar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="ai-messages" id="ai-messages"></div>
+    <div class="ai-input-row">
+      <textarea class="ai-input" id="ai-input" placeholder="Describe tu proyecto…" rows="1"></textarea>
+      <button class="ai-send-btn" id="ai-send" aria-label="Enviar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+      </button>
+    </div>
+  </div>
+  <button class="ai-fab" id="ai-fab" aria-label="Asistente de color">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+    </svg>
+  </button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
